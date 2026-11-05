@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>קריפטו טייקון</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1020;--panel:#151d33;--panel2:#1c2945;--gold:#f5c451;--green:#42d392;--muted:#a9b5cc;--line:#2b3958}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#18294b 0,#0b1020 55%);color:#f4f7ff;font-family:Arial,sans-serif;min-height:100vh}.wrap{max-width:1120px;margin:auto;padding:22px}.hero{text-align:center;margin:12px 0 22px}.hero h1{font-size:clamp(30px,6vw,48px);margin:0;color:var(--gold)}.hero p{color:var(--muted);margin:8px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}.stat,.panel{background:linear-gradient(145deg,var(--panel),#111a2e);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 8px 24px #0003}.stat small{color:var(--muted);display:block;margin-bottom:7px}.stat strong{font-size:clamp(18px,3vw,26px);color:var(--gold)}.layout{display:grid;grid-template-columns:1.05fr 1.4fr;gap:14px}.panel h2{margin:0 0 13px;font-size:20px}.mine{text-align:center;background:radial-gradient(circle,#263d66,#121c32);border-radius:15px;padding:24px 12px;border:1px solid #34496d}.coin{font-size:92px;line-height:1.2;cursor:pointer;user-select:none;filter:drop-shadow(0 8px 14px #0008);transition:transform .08s}.coin:active{transform:scale(.9)}button{border:0;border-radius:10px;padding:11px 14px;background:#2c4268;color:white;font-weight:700;cursor:pointer;font-size:14px}button:hover{filter:brightness(1.15)}button:disabled{opacity:.4;cursor:not-allowed}.primary{background:linear-gradient(120deg,#e8ad35,#f5d16a);color:#241a05}.green{background:#176b50}.mine button{margin-top:12px;font-size:16px;padding:13px 24px}.hint{color:var(--muted);font-size:13px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.tab.active{background:var(--gold);color:#251b05}.section{display:none}.section.active{display:block}.item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.item:last-child{border:0}.item b{display:block;margin-bottom:5px}.item small{color:var(--muted);line-height:1.5}.item button{min-width:112px}.tag{font-size:11px;color:#15213a;background:var(--gold);padding:4px 7px;border-radius:20px;margin-right:5px}.bar{height:8px;background:#0a1121;border-radius:20px;overflow:hidden;margin-top:7px}.bar span{display:block;height:100%;background:linear-gradient(90deg,#36bd8c,#f5c451);width:0}.market-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.market-card{background:var(--panel2);padding:13px;border-radius:12px}.market-card strong{display:block;font-size:20px;margin:7px 0}.up{color:var(--green)}.down{color:#ff7979}.notice{padding:10px 12px;border-radius:10px;background:#1e3550;color:#dceaff;margin:10px 0;font-size:13px}.achievement{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line)}.achievement.done{color:var(--green)}.footer{color:var(--muted);text-align:center;font-size:12px;margin:18px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#eac15a;color:#201704;padding:12px 18px;border-radius:12px;font-weight:bold;opacity:0;pointer-events:none;transition:opacity .2s}.toast.show{opacity:1}@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}.market-grid{grid-template-columns:1fr}.wrap{padding:13px}.item{align-items:flex-start}.item button{min-width:98px}}
+</style></head>
+<body><div class="wrap">
+<header class="hero"><h1>₿ קריפטו טייקון</h1><p>התחל בלחיצה אחת, בנה אימפריית כרייה והפוך לטייקון הקריפטו הגדול בעולם.</p></header>
+<div class="stats">
+ <div class="stat"><small>יתרת ביטקוין</small><strong id="coins">0 ₿</strong></div>
+ <div class="stat"><small>הכנסה לשנייה</small><strong id="income">0 ₿</strong></div>
+ <div class="stat"><small>שווי האימפריה</small><strong id="worth">0 ₿</strong></div>
+ <div class="stat"><small>מכפיל קבוע</small><strong id="mult">×1.00</strong></div>
+</div>
+<div class="layout">
+ <div class="panel"><h2>⛏️ מרכז הכרייה</h2><div class="mine"><div class="coin" id="coin" title="לחץ כדי לכרות">₿</div><div><b>לחץ על הביטקוין כדי לכרות!</b></div><div class="hint">כל לחיצה מעניקה <span id="clickPower">1</span> ₿</div><button class="primary" id="mineBtn">כרה ביטקוין</button></div>
+ <div class="notice" id="boostNotice">⚡ הבונוס הבא מחכה לך בחנות הבונוסים.</div>
+ <h2 style="margin-top:18px">🎯 משימה יומית</h2><div id="daily"></div>
+ <div class="bar"><span id="dailyBar"></span></div><p class="hint" id="dailyProgress"></p>
+ </div>
+ <div class="panel"><div class="tabs"><button class="tab active" data-tab="upgrades">🛒 שדרוגים</button><button class="tab" data-tab="market">📈 שוק</button><button class="tab" data-tab="achievements">🏆 הישגים</button><button class="tab" data-tab="prestige">🌟 Prestige</button></div>
+ <div class="section active" id="upgrades"><h2>שדרג את האימפריה</h2><div id="upgradeList"></div></div>
+ <div class="section" id="market"><h2>שוק הקריפטו</h2><p class="hint">המחירים משתנים מדי פעם. קנה מטבעות כשהמחיר נמוך ומכור כשהוא עולה.</p><div class="market-grid" id="marketList"></div><div class="notice">מחירי השוק הם חלק ממשחק הדמיה בלבד ואינם מחירי מסחר אמיתיים.</div></div>
+ <div class="section" id="achievements"><h2>אוסף ההישגים</h2><div id="achievementList"></div></div>
+ <div class="section" id="prestige"><h2>בנה אימפריה מחדש</h2><p>איפוס Prestige מאפס את הביטקוין והשדרוגים, אבל מעניק כוכבי טייקון שמגדילים לצמיתות את כל ההכנסות.</p><div class="notice">כל כוכב מעניק תוספת של 10% להכנסה וללחיצות.</div><p>כוכבים שתוכל לקבל עכשיו: <b id="prestigeGain">0</b> ⭐</p><button class="primary" id="prestigeBtn">בצע Prestige</button><p class="hint">נדרש שווי אימפריה של לפחות 100,000 ₿.</p></div>
+ </div>
+</div>
+<div class="footer">המשחק נשמר אוטומטית במכשיר שלך. זהו משחק סימולציה בלבד, לא ארנק ולא השקעה אמיתית.</div>
+</div><div class="toast" id="toast"></div>
+<script>
+const defaults={coins:0,total:0,clicks:0,stars:0,boostUntil:0,lastDay:'',dailyDone:false,market:{ETH:2,SOL:5,DOGE:100},inventory:{ETH:0,SOL:0,DOGE:0},prices:{ETH:20,SOL:8,DOGE:0.2},history:{ETH:0,SOL:0,DOGE:0},upgrades:{click:0,rig:0,gpu:0,warehouse:0,bonus:0}};
+let s;try{s={...defaults,...JSON.parse(localStorage.getItem('cryptoTycoonSave')||'{}')};s.upgrades={...defaults.upgrades,...s.upgrades};s.inventory={...defaults.inventory,...s.inventory};s.prices={...defaults.prices,...s.prices};}catch(e){s=structuredClone(defaults)}
+const defs=[
+ {id:'click',name:'אצבע מהירה',desc:'מגדיל את הרווח מכל לחיצה.',base:20,scale:1.7,kind:'click',amount:1},
+ {id:'rig',name:'כורה ביתי',desc:'מחשב כרייה בסיסי שמייצר ביטקוין אוטומטית.',base:60,scale:1.65,kind:'income',amount:1},
+ {id:'gpu',name:'חוות GPU',desc:'מערך כרטיסים שמייצר הכנסה בכל שנייה.',base:450,scale:1.72,kind:'income',amount:8},
+ {id:'warehouse',name:'מרכז נתונים',desc:'חוות שרתים מקצועית עם תפוקה גבוהה.',base:3500,scale:1.78,kind:'income',amount:55},
+ {id:'bonus',name:'מנוע אופטימיזציה',desc:'מכפיל את כל ההכנסות ב-15% לכל רמה.',base:1800,scale:2.1,kind:'mult',amount:.15}
+];
+const $=id=>document.getElementById(id);const fmt=n=>{if(n>=1e9)return (n/1e9).toFixed(2)+'B';if(n>=1e6)return (n/1e6).toFixed(2)+'M';if(n>=1e3)return (n/1e3).toFixed(2)+'K';return n.toFixed(n<10?2:0)};const cost=d=>Math.floor(d.base*Math.pow(d.scale,s.upgrades[d.id]));
+function income(){return (s.upgrades.rig+ s.upgrades.gpu*8+s.upgrades.warehouse*55)*(1+s.upgrades.bonus*.15)*(1+s.stars*.1)*(Date.now()<s.boostUntil?2:1)}
+function clickValue(){return (1+s.upgrades.click)*(1+s.upgrades.bonus*.15)*(1+s.stars*.1)*(Date.now()<s.boostUntil?2:1)}
+function worth(){return s.coins+defs.reduce((a,d)=>a+cost(d)*.35*s.upgrades[d.id],0)+Object.keys(s.inventory).reduce((a,k)=>a+s.inventory[k]*s.prices[k],0)}
+function save(){localStorage.setItem('cryptoTycoonSave',JSON.stringify(s))}
+function toast(t){$('toast').textContent=t;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1800)}
+function mine(){let v=clickValue();s.coins+=v;s.total+=v;s.clicks++;render();save()}
+$('mineBtn').onclick=mine;$('coin').onclick=mine;
+function buy(id){let d=defs.find(x=>x.id===id),c=cost(d);if(s.coins<c)return toast('אין מספיק ביטקוין לשדרוג הזה');s.coins-=c;s.upgrades[id]++;toast('השדרוג נרכש בהצלחה!');render();save()}
+function renderUpgrades(){$('upgradeList').innerHTML=defs.map(d=>{let c=cost(d),lv=s.upgrades[d.id];return `<div class="item"><div><b>${d.name} <span class="tag">רמה ${lv}</span></b><small>${d.desc}<br>${d.kind==='click'?'תוספת ללחיצה: +1':d.kind==='income'?`הכנסה נוספת: +${d.amount} ₿/שנייה`:'תוספת מכפיל: +15%'}</small></div><button class="primary" onclick="buy('${d.id}')">${fmt(c)} ₿<br><small>קנה</small></button></div>`}).join('')}
+const coins=[['ETH','Ethereum'],['SOL','Solana'],['DOGE','Dogecoin']];function renderMarket(){$('marketList').innerHTML=coins.map(([k,n])=>{let p=s.prices[k],change=s.history[k]||0;return `<div class="market-card"><b>${n}</b><strong>${fmt(p)} ₿</strong><small class="${change>=0?'up':'down'}">${change>=0?'▲':'▼'} ${Math.abs(change).toFixed(1)}%</small><p class="hint">בבעלותך: ${fmt(s.inventory[k])}</p><button onclick="trade('${k}',1)">קנה 1</button> <button onclick="trade('${k}',-1)">מכור 1</button></div>`}).join('')}
+function trade(k,dir){let p=s.prices[k];if(dir>0){if(s.coins<p)return toast('אין מספיק ביטקוין');s.coins-=p;s.inventory[k]++}else{if(s.inventory[k]<1)return toast('אין לך מטבע למכור');s.inventory[k]--;s.coins+=p}render();save()}
+function marketTick(){for(let k of Object.keys(s.prices)){let old=s.prices[k],next=Math.max(old*.45,old*(1+(Math.random()-.48)*.18));s.prices[k]=Math.max(.01,next);s.history[k]=(s.prices[k]/old-1)*100}renderMarket();save()}
+const achievements=[['first','הלחיצה הראשונה',()=>s.clicks>=1,'לחץ על הביטקוין פעם אחת'],['hundred','מאה מטבעות',()=>s.total>=100,'כרה 100 ₿ בסך הכול'],['miner','כורה מקצועי',()=>s.upgrades.rig>=5,'רכוש 5 כורים ביתיים'],['million','מיליון ראשון',()=>s.total>=1e6,'צבור מיליון ₿ לאורך המשחק'],['tycoon','טייקון אמיתי',()=>s.stars>=1,'בצע Prestige ראשון']];let unlocked={};function renderAchievements(){$('achievementList').innerHTML=achievements.map(([id,n,fn,desc])=>{let done=fn();if(done&&!unlocked[id]){unlocked[id]=true;toast('הישג חדש: '+n)}return `<div class="achievement ${done?'done':''}"><div><b>${done?'✓':'🔒'} ${n}</b><div class="hint">${desc}</div></div><b>${done?'הושג':'נעול'}</b></div>`}).join('')}
+function daily(){let today=new Date().toLocaleDateString('en-CA');if(s.lastDay!==today){s.lastDay=today;s.dailyDone=false;s.dailyTarget=100+Math.floor(Math.random()*400)}let done=s.dailyDone,progress=Math.min(100,s.totalDaily||0),target=s.dailyTarget||200;$('daily').innerHTML=`<b>${done?'✅ הושלמה!':'כרה '+target+' ₿ היום'}</b><p class="hint">פרס: ${target*2} ₿</p>`;$('dailyBar').style.width=(done?100:Math.min(100,progress/target*100))+'%';$('dailyProgress').textContent=`התקדמות: ${fmt(done?target:progress)} / ${fmt(target)} ₿`;if(!done&&progress>=target){s.dailyDone=true;s.coins+=target*2;toast('המשימה היומית הושלמה! קיבלת פרס.')}}
+function doPrestige(){let gain=Math.floor(Math.sqrt(worth()/100000));if(gain<1)return toast('צריך שווי של לפחות 100,000 ₿');if(!confirm(`לאפס את ההתקדמות ולקבל ${gain} כוכבי טייקון?`))return;s.stars+=gain;s.coins=0;s.upgrades={click:0,rig:0,gpu:0,warehouse:0,bonus:0};s.inventory={ETH:0,SOL:0,DOGE:0};s.totalDaily=0;toast('האימפריה נבנתה מחדש!');render();save()}
+$('prestigeBtn').onclick=doPrestige;
+function render(){ $('coins').textContent=fmt(s.coins)+' ₿';$('income').textContent=fmt(income())+' ₿';$('worth').textContent=fmt(worth())+' ₿';$('mult').textContent='×'+(1+s.stars*.1+s.upgrades.bonus*.15).toFixed(2);$('clickPower').textContent=fmt(clickValue());$('prestigeGain').textContent=Math.floor(Math.sqrt(worth()/100000));$('boostNotice').textContent=Date.now()<s.boostUntil?'⚡ בונוס פעיל! הכנסה ולחיצות כפולות.':'⚡ בונוס כרייה זמין בחנות הבונוסים.';renderUpgrades();renderMarket();renderAchievements();daily()}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab,.section').forEach(x=>x.classList.remove('active'));b.classList.add('active');$(''+b.dataset.tab).classList.add('active')});
+// Daily progress counts only newly mined coins, including passive production.
+let lastTotal=s.total;s.totalDaily=s.totalDaily||0;setInterval(()=>{let inc=income();s.coins+=inc;s.total+=inc;s.totalDaily+=inc;render();save()},1000);setInterval(marketTick,12000);
+// Reward is granted only after the native rewarded-ad SDK confirms completion.
+function grantVideoReward(){
+  boostButton.disabled=false;
+  boostButton.textContent='▶ צפה בסרטון לקבלת בונוס ×2 (ללא הגבלה)';
+  s.boostUntil=Date.now()+30000;
+  toast('כל הכבוד! בונוס ×2 הופעל ל-30 שניות');
+  render();save();
+}
+window.onRewardedAdCompleted=grantVideoReward;
+window.onRewardedAdUnavailable=function(message){
+  boostButton.disabled=false;
+  boostButton.textContent='▶ צפה בסרטון לקבלת בונוס ×2 (ללא הגבלה)';
+  toast(message || 'הסרטון אינו זמין כרגע. נסה שוב מאוחר יותר.');
+};
+
+// Rewarded-video entry point. In a browser this runs a clearly-labelled demo timer;
+// in the Android APK, AndroidBridge must call onRewardedAdCompleted only from the
+// Google Mobile Ads rewarded-ad earned-reward callback.
+
+let boostButton=document.createElement('button');boostButton.textContent='▶ צפה בסרטון לקבלת בונוס ×2 (ללא הגבלה)';boostButton.style.marginTop='10px';boostButton.onclick=()=>{if(boostButton.disabled)return;
+if(window.AndroidBridge && typeof window.AndroidBridge.showRewardedAd === 'function'){
+  boostButton.disabled=true;
+  boostButton.textContent='ממתין לסרטון...';
+  window.AndroidBridge.showRewardedAd();
+}else{
+  toast('צפייה בפרסומות זמינה באפליקציית Android בלבד');
+  boostButton.disabled=false;
+  boostButton.textContent='▶ צפה בסרטון לקבלת בונוס ×2 (ללא הגבלה)';
+}};$('boostNotice').after(boostButton);
+let adNote=document.createElement('p');
+adNote.className='hint';
+adNote.textContent='פרסומות ותגמולים זמינים בתוך אפליקציית Android בלבד.';
+boostButton.after(adNote);
+
+render();save();
+</script></body></html>

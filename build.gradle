@@ -1,0 +1,22 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.example.cryptotycoon'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'com.example.cryptotycoon'
+        minSdk 24
+        targetSdk 35
+        versionCode 1
+        versionName '1.0'
+    }
+}
+
+dependencies {
+    // Google Mobile Ads SDK (Legacy). Test IDs are configured in the app.
+    // Google announced the Next-Gen SDK as preferred; see README for migration note.
+    implementation 'com.google.android.gms:play-services-ads:25.5.0'
+}
